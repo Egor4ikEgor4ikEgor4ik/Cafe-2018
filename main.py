@@ -1,9 +1,14 @@
+import os
 from pprint import pprint
 import json
 
 import requests
 import folium
 from geopy import distance
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def fetch_coordinates(apikey, address):
     base_url = "https://geocode-maps.yandex.ru/1.x"
@@ -30,10 +35,10 @@ with open("coffee.json", "r") as my_file:
 
 print ("ПРИВЕТ! ТЫ ПОПАЛ НА СЕРВЕР МАЙНКРАФТА! ПИШИ НОМЕР КАРТЫ И СВОЕ МЕСТОПОЛОЖЕНИЕ, И ПОЛУЧИ В ПОДАРОК 5  DUNGEON МАСТЕРОВ ДОМОЙ")
 
-yendex_key="0a4c58c6-a58d-4c1b-8f12-395d7481f64c"
+yandex_key=os.getenv("YANDEX_KEY")
 
 location=input("где вы находитесь: ")
-coordinates=fetch_coordinates(yendex_key,location)
+coordinates=fetch_coordinates(yandex_key,location)
 print=("ваши координаты: ",coordinates)
 
 information=[]
@@ -48,10 +53,6 @@ for coffee in file_contents:
 def get_coffee_distance(coffee):
     return coffee['distance']
 nearest_cafeshka=sorted(information, key=get_coffee_distance)
-
-pprint(type(nearest_cafeshka))
-pprint (nearest_cafeshka[0:5])
-
 
 
 m = folium.Map(coordinates,zoom_start=13)
