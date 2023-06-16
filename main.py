@@ -52,13 +52,13 @@ for coffee in file_contents:
     information.append(cofeshki)
 def get_coffee_distance(coffee):
     return coffee['distance']
-nearest_cafeshka=sorted(information, key=get_coffee_distance)
+distance_sorted_cafeshki=sorted(information, key=get_coffee_distance)
 
 
 m = folium.Map(coordinates,zoom_start=13)
 tooltip = "Click me!"
 
-for cafeshki in nearest_cafeshka:
+for cafeshki in distance_sorted_cafeshki[0:5]:
     folium.Marker(
         [cafeshki['latitude'],cafeshki['longitude']], popup=cafeshki['title'], tooltip=tooltip
         ).add_to(m)
