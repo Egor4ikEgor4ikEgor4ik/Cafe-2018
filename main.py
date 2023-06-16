@@ -1,8 +1,9 @@
+from pprint import pprint
+import json
+
+import requests
 import folium
 from geopy import distance
-import json
-import requests
-from pprint import pprint
 
 def fetch_coordinates(apikey, address):
     base_url = "https://geocode-maps.yandex.ru/1.x"
